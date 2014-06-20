@@ -1,7 +1,12 @@
 class Cookbook
 	attr_accessor :title
+	attr_accessor :recipes
 	def initialize(title)
 		@title = title
+		@recipes = []
+	end
+	def add_recipe(new_recipe)
+		@recipes << new_recipe
 	end
 end
 
@@ -31,3 +36,6 @@ burrito.steps = ["heat tomatoes", "place tomatoes in tortilla", "roll up"]
 p burrito.title # "Veggie Burrito"
 p burrito.ingredients # ["tortilla", "tomatoes"]
 p burrito.steps # ["heat tomatoes", "place tomatoes in tortilla", "roll up"]
+mex_cuisine.recipes # []
+mex_cuisine.add_recipe(burrito)
+p mex_cuisine.recipes # [#<Recipe:0x007fbc3b92e560 @title="Veggie Burrito", @ingredients=["tortilla", "tomatoes"], @steps=["heat tomatoes", "place tomatoes in tortilla", "roll up"]>]
