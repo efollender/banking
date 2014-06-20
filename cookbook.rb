@@ -19,6 +19,17 @@ class Cookbook
 			puts "These are the ingredients for #{recipe.title}: #{recipe.ingredients}"
 		end
 	end
+	def print_cookbook
+		@recipes.each do |recipe|
+			puts recipe.title
+			puts "Ingredients: #{recipe.ingredients.join(", ")}"
+			count = 1
+			recipe.steps.each do |step|
+				puts "#{count}. #{step}"
+				count+=1
+			end
+		end
+	end
 end
 
 class Recipe
@@ -29,6 +40,15 @@ class Recipe
 		@title = title
 		@ingredients = ingredients
 		@steps = steps
+	end
+	def print_recipe
+		puts @title
+		puts "Ingredients: #{@ingredients.join(", ")}"
+		count = 1
+		@steps.each do |step|
+			puts "#{count}. #{step}"
+			count+=1
+		end
 	end
 end
 
@@ -52,3 +72,7 @@ mex_cuisine.add_recipe(burrito)
 p mex_cuisine.recipes # [#<Recipe:0x007fbc3b92e560 @title="Veggie Burrito", @ingredients=["tortilla", "tomatoes"], @steps=["heat tomatoes", "place tomatoes in tortilla", "roll up"]>]
 mex_cuisine.recipe_titles # Veggie Burrito
 mex_cuisine.recipe_ingredients # These are the ingredients for Veggie Burrito: ["tortilla", "bean"]
+burrito.print_recipe
+nachos = Recipe.new("Nachos",["tortilla chips", "cheese", "refried beans", "salsa"],["Place chips in pan","Layer remaining ingredients on chips","Bake at 350 until cheese is melted and golden"])
+mex_cuisine.add_recipe(nachos)
+mex_cuisine.print_cookbook
