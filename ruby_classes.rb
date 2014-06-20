@@ -6,9 +6,15 @@
 ['a', 'b', 'c', 'd'].slice(1, 2)
 
 #class.rb 
-Pet = Class.new do
+class Pet
+	def set_noise(noise)
+		@noise = noise
+	end
+	def set_type(type)
+		@type = type
+	end
 	def speak
-		puts("Woof Woof")
+		puts "#{@noise}!"
 	end
 	def walk(distance)
 		puts "Walked #{distance}!"
@@ -33,4 +39,5 @@ end
 
 dog = Pet.new
 puts(dog)
+dog.set_noise("Bark")
 dog.speak
