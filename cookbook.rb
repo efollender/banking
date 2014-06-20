@@ -4,9 +4,13 @@ class Cookbook
 	def initialize(title)
 		@title = title
 		@recipes = []
+		@meal_types = []
 	end
 	def add_recipe(new_recipe)
 		@recipes << new_recipe
+		meal = new_recipe.meal_type
+		@meal_types.push([meal])
+		@meal_types[meal].push(["#{new_recipe.title}"])
 		puts "Added a recipe to the collection: #{new_recipe.title}"
 	end
 	def recipe_titles
@@ -30,16 +34,29 @@ class Cookbook
 			end
 		end
 	end
+	def sort_cookbook
+		sorted_recipes = @recipes.sort {|a,b| a.title <=> b.title}
+		sorted_recipes.each do |recipe|
+			puts recipe.title
+		end
+	end
+	def get_meal(meal)
+		@meal_types[:meal].each do |recipe|
+			puts recipe
+		end
+	end
 end
 
 class Recipe
 	attr_accessor :title
 	attr_accessor :ingredients
 	attr_accessor :steps
-	def initialize(title,ingredients,steps)
+	attr_accessor :meal_type
+	def initialize(title,ingredients,steps,meal_type)
 		@title = title
 		@ingredients = ingredients
 		@steps = steps
+		@meal_type = meal_type
 	end
 	def print_recipe
 		puts @title
@@ -53,7 +70,7 @@ class Recipe
 end
 
 mex_cuisine = Cookbook.new("Mexican Cooking")
-burrito = Recipe.new("Bean burrito",["Tortilla","bean"],["heat beans","place beans in tortilla", "roll up"])
+burrito = Recipe.new("Bean burrito",["Tortilla","bean"],["heat beans","place beans in tortilla", "roll up"],"Dinner")
 puts mex_cuisine.title # Mexican Cooking
 puts burrito.title # Bean Burrito
 p burrito.ingredients # ["tortilla", "bean", "cheese"]
@@ -73,6 +90,8 @@ p mex_cuisine.recipes # [#<Recipe:0x007fbc3b92e560 @title="Veggie Burrito", @ing
 mex_cuisine.recipe_titles # Veggie Burrito
 mex_cuisine.recipe_ingredients # These are the ingredients for Veggie Burrito: ["tortilla", "bean"]
 burrito.print_recipe
-nachos = Recipe.new("Nachos",["tortilla chips", "cheese", "refried beans", "salsa"],["Place chips in pan","Layer remaining ingredients on chips","Bake at 350 until cheese is melted and golden"])
+nachos = Recipe.new("Nachos",["tortilla chips", "cheese", "refried beans", "salsa"],["Place chips in pan","Layer remaining ingredients on chips","Bake at 350 until cheese is melted and golden"],"Dinner")
 mex_cuisine.add_recipe(nachos)
 mex_cuisine.print_cookbook
+mex_cuisine.sort_cookbook
+mex_cuisine.get_meal("Dinner")
