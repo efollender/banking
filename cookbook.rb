@@ -7,6 +7,17 @@ class Cookbook
 	end
 	def add_recipe(new_recipe)
 		@recipes << new_recipe
+		puts "Added a recipe to the collection: #{new_recipe.title}"
+	end
+	def recipe_titles
+		@recipes.each do |recipe|
+			puts recipe.title
+		end
+	end
+	def recipe_ingredients
+		@recipes.each do |recipe|
+			puts "These are the ingredients for #{recipe.title}: #{recipe.ingredients}"
+		end
 	end
 end
 
@@ -39,3 +50,5 @@ p burrito.steps # ["heat tomatoes", "place tomatoes in tortilla", "roll up"]
 mex_cuisine.recipes # []
 mex_cuisine.add_recipe(burrito)
 p mex_cuisine.recipes # [#<Recipe:0x007fbc3b92e560 @title="Veggie Burrito", @ingredients=["tortilla", "tomatoes"], @steps=["heat tomatoes", "place tomatoes in tortilla", "roll up"]>]
+mex_cuisine.recipe_titles # Veggie Burrito
+mex_cuisine.recipe_ingredients # These are the ingredients for Veggie Burrito: ["tortilla", "bean"]
