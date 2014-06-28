@@ -4,7 +4,7 @@ class Person
 		@caffeine_level = caffeine_level
 	end
 	def run
-		num = rand(1.1..20.0)
+		num = rand(1.1..20.0).to_i
 		puts "You ran #{num} miles!"
 		@caffeine_level -= num
 	end
@@ -26,3 +26,8 @@ end
 
 class EvilNinja
 end
+
+emma = Person.new("Emma", 30)
+emma.run
+emma.scream
+emma.drink_coffee

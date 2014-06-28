@@ -4,13 +4,15 @@ class Cookbook
 	def initialize(title)
 		@title = title
 		@recipes = []
-		@meal_types = []
+		@meal_types = Hash.new
 	end
 	def add_recipe(new_recipe)
 		@recipes << new_recipe
 		meal = new_recipe.meal_type
-		@meal_types.push([meal])
-		@meal_types[meal].push(["#{new_recipe.title}"])
+		if @meal_types[meal].nil?
+			@meal_types[meal] = []
+		end
+		@meal_types[meal].push(new_recipe.title)
 		puts "Added a recipe to the collection: #{new_recipe.title}"
 	end
 	def recipe_titles
@@ -41,7 +43,7 @@ class Cookbook
 		end
 	end
 	def get_meal(meal)
-		@meal_types[:meal].each do |recipe|
+		@meal_types[meal].each do |recipe|
 			puts recipe
 		end
 	end
